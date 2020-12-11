@@ -1,0 +1,31 @@
+$buttonA-color:#46139f;
+$buttonB-color:#ff7f50;
+
+.buttonDiv {
+    position         : absolute;
+    left             : 50%;
+    top              : 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform        : translate(-50%, -50%);
+    display          : flex;
+}
+
+.buttonA {
+    background-color: #46139f;
+    color           : #ffffff;
+    margin-right    : 10px;
+}
+
+.buttonB {
+    background-color: #ff7f50;
+    color           : #ffffff;
+}
+
+.buttonC {
+    background-color: #ffffff;
+    border-color    : #46139f;
+}
+
+.modal-footer {
+    justify-content: flex-start !important;
+}
