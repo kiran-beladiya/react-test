@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
 import { Provider } from 'react-redux';
@@ -10,11 +10,11 @@ import {
 } from "react-router-dom";
 
 ReactDOM.render(
-  <Router>
-    <Provider store={store} >
+  <Provider store={store} >
+    <Router>
       <App />
-    </Provider>
-  </Router>,
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

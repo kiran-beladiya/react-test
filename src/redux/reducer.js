@@ -6,7 +6,7 @@ const initialState = {
     contacts: []
 }
 
-const fetchUsersFailed = (state, action) => {
+const fetchContactsFailed = (state, action) => {
     return updateObject(state, { error: true });
 };
 
@@ -19,8 +19,8 @@ const setContacts = (state, action) => {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.FETCH_USERS_FAILED: return fetchUsersFailed(state, action);
-        case actionTypes.FETCH_USERS: return setContacts(state, action);
+        case actionTypes.FETCH_CONTACTS_FAILED: return fetchContactsFailed(state, action);
+        case actionTypes.FETCH_CONTACTS: return setContacts(state, action);
         default: return state;
     }
 };

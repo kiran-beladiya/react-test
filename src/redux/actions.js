@@ -5,19 +5,16 @@ import { token } from '../constants';
 export const contactsList = () => {
     return (dispatch) => {
         axios.defaults.headers.common['Authorization'] = token;
-        console.log(token)
         axios.get('contacts')
             .then(response => {
-                debugger
                 dispatch({
-                    type: actionTypes.FETCH_USERS,
+                    type: actionTypes.FETCH_CONTACTS,
                     payload: response
                 });
             })
             .catch(error => {
-                debugger
                 dispatch({
-                    type: actionTypes.FETCH_USERS_FAILED,
+                    type: actionTypes.FETCH_CONTACTS_FAILED,
                     payload: error
                 });
             })

@@ -1,110 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Button from '../../components/Button';
-import { Form, FormControl } from 'react-bootstrap';
-import Modal from '../../components/Modal';
+import ModalA from '../../App/routes/ModalA';
+import ModalB from '../../App/routes/ModalB';
 import { withRouter } from "react-router";
-import { contactsList } from '../../redux/actions';
-import { useDispatch } from 'react-redux';
 import '../../styles/base.scss';
-// import axios from '../../utils/Api';
-// import { token } from '../../constants';
-
-const Dashboard = (props) => {
-    const dispatch = useDispatch();
-    React.useEffect(() => {
-        dispatch(contactsList);
-        // axios.defaults.headers.common['Authorization'] = token;
-        // axios.get('contacts.json')
-        //     .then(response => {
-        //         debugger
-        //         // dispatch({
-        //         //     type: actionTypes.FETCH_USERS,
-        //         //     payload: response.data.data
-        //         // });
-        //     })
-        //     .catch(error => {
-        //         debugger
-        //         // dispatch({
-        //         //     type: actionTypes.FETCH_USERS_FAILED,
-        //         //     payload: error
-        //         // });
-        //     })
-    }, [dispatch]);
-
-    const [showModalA, setShowModalA] = React.useState(false);
-    const [showModalB, setShowModalB] = React.useState(false);
-
-    const handleCloseModalB = () => {
-        props.history.push("/")
-        setShowModalB(false)
+class Dashboard extends Component {
+    state = {
+        showModalA: false,
+        showModalB: false
     };
 
-    const handleCloseModalA = () => {
-        props.history.push("/")
-        setShowModalA(false)
+    handleCloseModalB = () => {
+        this.props.history.push("/");
+        this.setState({ showModalB: false });
     };
 
-    const handleShowModalA = () => {
-        props.history.push("modal-a")
-        setShowModalA(true)
+    handleCloseModalA = () => {
+        this.props.history.push("/");
+        this.setState({ showModalA: false });
     };
 
-    const handleShowModalB = () => {
-        props.history.push("modal-b")
-        setShowModalB(true)
+    handleShowModalA = () => {
+        this.props.history.push("modal-a");
+        this.setState({ showModalA: true });
     };
 
-    return (
-        <div className='buttonDiv'>
-            <Button btnTitle={'Button A'} btnClass={'buttonA'} clicked={handleShowModalA} />
-            <Button btnTitle={'Button B'} btnClass={'buttonB'} clicked={handleShowModalB} />
+    handleShowModalB = () => {
+        this.props.history.push("modal-b");
+        this.setState({ showModalB: true });
+    };
 
-            <Modal onShow={showModalA} onHide={handleCloseModalA}
-                Body={
-                    <>
-                        <div className={'mb-3'}>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        </div>
-                        <div className={'d-flex justify-content-between'}>
-                            <Button variant="secondary" btnClass={'buttonA'} btnTitle={'All Contacts'} clicked={handleCloseModalA} />
-                            <Button variant="primary" btnClass={'buttonB'} btnTitle={'US Contacts'} clicked={handleCloseModalA} />
-                            <Button variant="primary" btnClass={'buttonC'} btnTitle={'Close'} clicked={handleCloseModalA} />
-                        </div>
-                    </>
-                }
-                Footer={
-                    <>
-                        <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Only even" />
-                        </Form.Group>
-                    </>
-                }
-            />
+    render() {
+        const { showModalA, showModalB } = this.state;
+        return (
+            <div className='buttonDiv'>
 
-            <Modal onShow={showModalB} onHide={handleCloseModalB}
-                Body={
-                    <>
-                        <div className={'mb-3'}>
-                            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        </div>
-                        <div className={'d-flex justify-content-between'}>
-                            <Button variant="secondary" btnClass={'buttonA'} btnTitle={'All Contacts'} clicked={handleCloseModalB} />
-                            <Button variant="primary" btnClass={'buttonB'} btnTitle={'US Contacts'} clicked={handleCloseModalB} />
-                            <Button variant="primary" btnClass={'buttonC'} btnTitle={'Close'} clicked={handleCloseModalB} />
-                        </div>
-                    </>
-                }
-                Footer={
-                    <>
-                        <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Only even" />
-                        </Form.Group>
-                    </>
-                }
-            />
+                <Button btnTitle={'Button A'} btnClass={'buttonA'} clicked={this.handleShowModalA.bind(this)} />
+                <Button btnTitle={'Button B'} btnClass={'buttonB'} clicked={this.handleShowModalB.bind(this)} />
 
-        </div>
-    );
+                <ModalA showModalA={showModalA} handleCloseModalA={this.handleCloseModalA.bind(this)} />
+                <ModalB showModalB={showModalB} handleCloseModalB={this.handleCloseModalB.bind(this)} />
+
+            </div>
+        );
+    };
 };
 
 export default withRouter(Dashboard);
